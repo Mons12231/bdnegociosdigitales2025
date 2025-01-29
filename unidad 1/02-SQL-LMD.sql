@@ -32,8 +32,17 @@ select *,(UnitPrice * Quantity) as Importe from [Order Details]
 -- Seleccionar las fechas de orden ano mes y dia, el cliente que lo ordeno y el empleado que lo realizo
 select OrderDate as Fecha, year(OrderDate) as Ano, month(OrderDate) as Mes, day(OrderDate) as Dia, CustomerID, EmployeeID from Orders
 
+-- filas duplicadas (Distinct, quitar campos repetidos )
+
+
+--Mostrar los paises en donde se tiene clientes, mostrando pais solamente 
+--(primero se ejecuta el from)
+select  distinct Country  from Customers
+order by country 
+
 -- Clausula where 
--- Operadores relacionales (<, >, <=, >=, != o <>)
+-- Operadores relacionales o test de comparacion (<, >, <=, >=, != o <>)
+
 select * from Customers
 -- Seleccionar el cliente BOLID
 select CustomerID as Clienteid, CompanyName as NombreEmpresa, City as Ciudad, Country as Pais from Customers where CustomerID = 'BOLID';
@@ -50,3 +59,49 @@ select ProductName as 'Nombre del Producto', CategoryID as Categoria, UnitsInSto
 -- Seleccionar ordenes de compra mostrando la fecha de orden, entrega, envio, cliente al que se vendio de 1996
 select OrderDate as 'Fecha de Orden', RequiredDate as Entrega, ShippedDate as Envio, CustomerID  from Orders where year(OrderDate) = 1996
 select * from Orders
+
+-- mostrar todas las ordenes de compra donde la cantidad
+-- de productos comprados sea mayor a 5 
+select * from [Order Details]
+where Quantity >= 40 
+
+-- mostrar el nombre completo del empleado, su numero de empleado,
+-- fecha de nacimiento, cuidad y fecha de contratacion y esta 
+-- debe ser de aquellos que fueron contratados despues de 1993 
+--los resultados en sus encabezados deben ser mostrados en espanol 
+select  EmployeeID as 'empleadoid',
+FirstName as 'primer nombre',
+LastName as 'apellido',
+BirthDate as 'fecha de nacimiento', 
+City as 'cuidad', HireDate as 'fecha de contratacion'
+from Employees
+where year(HireDate) >1993
+
+--version 2
+select  EmployeeID as 'empleadoid',
+(FirstName +  '      ' + LastName) as 'Nombre completo',
+BirthDate as 'fecha de nacimiento', 
+City as 'cuidad', HireDate as 'fecha de contratacion'
+from Employees
+where year(HireDate) >1993
+
+--version 3
+select  EmployeeID as 'empleadoid',
+Concat(FirstName, '   ',LastName) as 'nombre completo',
+BirthDate as 'fecha de nacimiento', 
+City as 'cuidad', HireDate as 'fecha de contratacion'
+from Employees
+where year(HireDate) >1993
+
+--Mostrar los empleados que no son dirigidos por el jefe Fuller Andrew
+select EmployeeID as 'empleadoid',
+Concat(FirstName, '   ',LastName) as 'nombre completo',
+BirthDate as 'fecha de nacimiento', 
+City as 'cuidad', HireDate as 'fecha de contratacion', ReportsTo as 'Jefe'
+from Employees
+where ReportsTo <>2
+
+
+-- SELECCIONAR LOS EMPLEADOS QUE NO TENGAN JEFE
+SELECT * FROM Employees
+WHERE ReportsTo is null
