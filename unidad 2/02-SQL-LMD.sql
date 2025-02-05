@@ -314,3 +314,50 @@ select  FirstName, LastName
 from Employees
 where FirstName like 'A_____'
 
+--seleccionar los productos que comiencen con A O B (04-02-25)
+select * from Products
+where ProductName like '[ABC]%'
+
+
+select * from Products
+where ProductName like '[A-M]%'
+
+--SELECCIONAR TODOS LOS PRODUCTOS QUE NO COMIENCEN CON A O B 
+select * from Products
+where ProductName like '[^AB]%'
+
+--SELECCIONAR TODOS LOS PRODUCTOS DONDE EL NOMBRE COMIENCE CON A PERO NO LA E 
+select * from Products
+where ProductName like 'A[^E]%'  
+
+--CLAUSULA ORDER BY 
+select ProductID, ProductName, UnitPrice, UnitsInStock 
+from Products
+order by UnitPrice desc
+---
+select ProductID, ProductName, UnitPrice, UnitsInStock 
+from Products
+order by UnitPrice asc
+---
+select ProductID, ProductName, UnitPrice, UnitsInStock 
+from Products
+order by 3 desc
+---
+select ProductID, ProductName, UnitPrice as 'precio', UnitsInStock 
+from Products
+order by 'precio' desc
+
+---seleccionar los clientes ordenados por el pais y dentro por cuidad 
+select CustomerID,Country, City from Customers  order by Country asc, city asc 
+
+--
+select CustomerID,Country, City from Customers where Country in ('Brazil', 'Germany') order by Country asc, city desc
+
+--
+
+select CustomerID,Country, City, Region from Customers where (Country = 'Brazil' or Country ='Country') and region is not null order by Country asc, city desc
+
+---
+select CustomerID,Country, City from Customers where Country in ('Brazil', 'Germany') order by Country asc, city desc
+
+
