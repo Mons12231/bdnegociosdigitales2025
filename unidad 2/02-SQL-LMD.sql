@@ -32,7 +32,7 @@ from Employees
 -- Seleccionar el importe de los productos vendididos en una orden 
 select *,(UnitPrice * Quantity) as Importe from [Order Details]
 
--- Seleccionar las fechas de orden ano mes y dia, el cliente que lo ordeno y el empleado que lo realizo
+-- Seleccionar las fechas de orden año mes y dia, el cliente que lo ordeno y el empleado que lo realizo
 select OrderDate as Fecha, 
 year(OrderDate) as Ano, month(OrderDate) as Mes, day(OrderDate) as Dia, CustomerID, EmployeeID 
 from Orders
