@@ -1,3 +1,4 @@
+``` sql
 select c.CategoryName, c.CategoryID, p.CategoryID, p.ProductName 
 from Categories as c
 inner join Products as p 
@@ -31,3 +32,4 @@ VALUES('Guaracha sabrosona',1,null, 'xyz',68.7,45,12,2,0)
 
 delete Products
 where CategoryID = 9 
+```
